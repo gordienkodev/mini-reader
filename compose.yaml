@@ -1,0 +1,16 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: mini-reader-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: reader
+      POSTGRES_USER: reader
+      POSTGRES_PASSWORD: reader123
+    ports:
+      - "127.0.0.1:5434:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
