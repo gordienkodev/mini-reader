@@ -6,16 +6,16 @@ use App\Models\Book;
 use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreCommentRequest;
 use Illuminate\Http\Response;
 
 class CommentController extends Controller
 {
-    public function store(Request $request, Book $book): JsonResponse
-    {
-        $data = $request->validate([
-            'text' => 'required|string|max:1000',
-        ]);
+    public function store(
+    StoreCommentRequest $request,
+    Book $book
+    ): JsonResponse {
+        $data = $request->validated();
 
         $user = User::where('email', 'reader@example.com')
             ->firstOrFail();
